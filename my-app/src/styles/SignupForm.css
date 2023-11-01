@@ -1,0 +1,27 @@
+.Signup-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.form {
+  display: flex;
+}
+
+.form-left {
+  display: flex;
+  flex-direction: column;
+  margin-right: 50px;
+}
+
+.form-right {
+  display: flex;
+  flex-direction: column;
+}
+
+.status {
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+}

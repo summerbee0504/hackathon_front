@@ -1,0 +1,15 @@
+.Button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.Google-button:active {
+  color: #dfffff;
+  box-shadow: 0 0 0 0.05rem #ffd406;
+}
+
+.Google-button:hover {
+  color: #dfffff;
+  box-shadow: 0 0 0 0.05rem #ffd406;
+}
