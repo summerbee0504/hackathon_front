@@ -15,10 +15,7 @@ function PrivateRoute(_props: RouteProps): React.ReactElement | null {
 }
 
 function App() {
-  const { isSignedIn } = useContext(AuthContext);
-  if (isSignedIn !== true) {
-    window.location.href = '/';
-  }
+  //const { isSignedIn } = useContext(AuthContext);
 
   return (
     <BrowserRouter>
