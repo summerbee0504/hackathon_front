@@ -29,7 +29,6 @@ export default function AccountMenu() {
 
   const handleLogout = () => {
     auth.signOut();
-
     navigate('/');
   };
 
