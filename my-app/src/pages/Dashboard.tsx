@@ -1,86 +1,61 @@
-import Grid from '@mui/material/Grid';
-import BasicCard from '../components/BasicCard';
 import Box from '@mui/material/Box';
-import Drawer from '@mui/material/Drawer';
 import CssBaseline from '@mui/material/CssBaseline';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
-import List from '@mui/material/List';
 import Typography from '@mui/material/Typography';
-import Divider from '@mui/material/Divider';
-import ListItem from '@mui/material/ListItem';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
-import MailIcon from '@mui/icons-material/Mail';
 import '../styles/Dashboard.css';
+import CategoryTabs from '../components/CategoryTabs';
+import ArticleLists from '../components/ArticleLists';
+import DashboardToolbar from '../components/DashboardToolbar';
+import { useState } from 'react';
+import AccountMenu from '../components/AccountMenu';
+import { IconButton } from '@mui/material';
+import AddIcon from '@mui/icons-material/Add';
+import { Link } from 'react-router-dom';
 
 const drawerWidth = 240;
 
 const Dashboard = () => {
+  const [categoryKey, setCategoryKey] = useState(1);
+  const [id, setId] = useState('');
+  const [searchBy, setSearchBy] = useState('');
+  const [toolbarTitle, setToolbarTitle] = useState('All Posts');
+
+  const handleSetKey = (newKey: number) => {
+    setCategoryKey(newKey);
+  };
+
+  const handleSetId = (newId: string) => {
+    setId(newId);
+  };
+
+  const handleSetSearchBy = (newSearchBy: string) => {
+    setSearchBy(newSearchBy);
+  };
+
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
       <AppBar position="fixed" sx={{ width: `calc(100% - ${drawerWidth}px)`, ml: `${drawerWidth}px` }}>
         <Toolbar>
-          <Typography variant="h6" noWrap component="div">
-            Permanent drawer
-          </Typography>
+          <Box display="flex" alignItems="center" justifyContent="space-between" width="100%">
+            <Box>
+              <Typography variant="h6" noWrap component="div">
+                {toolbarTitle}
+              </Typography>
+            </Box>
+            <Box display="flex" alignItems="center">
+              <IconButton component={Link} to={`./new`}>
+                <AddIcon />
+              </IconButton>
+              <AccountMenu />
+            </Box>
+          </Box>
         </Toolbar>
+        <CategoryTabs setKey={handleSetKey} />
       </AppBar>
-      <Drawer
-        sx={{
-          width: drawerWidth,
-          flexShrink: 0,
-          '& .MuiDrawer-paper': {
-            width: drawerWidth,
-            boxSizing: 'border-box'
-          }
-        }}
-        variant="permanent"
-        anchor="left"
-      >
-        <Toolbar>
-          <img src="./logo.png" alt="logo" className="logo" />
-        </Toolbar>
-        <Divider />
-        <List>
-          {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-            <ListItem key={text} disablePadding>
-              <ListItemButton>
-                <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-                <ListItemText primary={text} />
-              </ListItemButton>
-            </ListItem>
-          ))}
-        </List>
-        <Divider />
-        <List>
-          {['All mail', 'Trash', 'Spam'].map((text, index) => (
-            <ListItem key={text} disablePadding>
-              <ListItemButton>
-                <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-                <ListItemText primary={text} />
-              </ListItemButton>
-            </ListItem>
-          ))}
-        </List>
-      </Drawer>
-      <Box component="main" sx={{ flexGrow: 1, bgcolor: 'background.default', p: 3 }}>
-        <Toolbar />
-        <Grid container spacing={2}>
-          <Grid item>
-            <BasicCard />
-          </Grid>
-          <Grid item>
-            <BasicCard />
-          </Grid>
-          <Grid item>
-            <BasicCard />
-          </Grid>
-        </Grid>
-      </Box>
+      <DashboardToolbar setId={handleSetId} setSearchBy={handleSetSearchBy} setToolbarTitle={setToolbarTitle} />
+      <ArticleLists categoryKey={categoryKey} id={id} searchBy={searchBy} />
     </Box>
   );
 };
