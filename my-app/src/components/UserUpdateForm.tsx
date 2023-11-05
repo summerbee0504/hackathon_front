@@ -20,7 +20,7 @@ const ValidationTextField = styled(TextField)({
   }
 });
 
-const SignupForm = () => {
+const UserUpdateForm = () => {
   const { currentUser } = useContext(AuthContext);
   const [name, setName] = useState(currentUser?.displayName || '');
   const [term, setTerm] = useState<string | undefined>(undefined);
@@ -114,4 +114,4 @@ const SignupForm = () => {
   );
 };
 
-export default SignupForm;
+export default UserUpdateForm;

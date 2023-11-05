@@ -13,6 +13,8 @@ const LoginForm = () => {
         const isNewUser = getAdditionalUserInfo(result)?.isNewUser;
         if (isNewUser) {
           navigate('/signup');
+        } else {
+          navigate('/dashboard');
         }
       })
       .catch((error) => {
