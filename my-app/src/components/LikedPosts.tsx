@@ -1,8 +1,9 @@
 import { Box, Toolbar } from '@mui/material';
 import BasicCard from './BasicCard';
-import { useEffect, useState } from 'react';
+import { useContext } from 'react';
 import YouTube from 'react-youtube';
 import { useGetRequest } from './useGetRequest';
+import { AuthContext } from './AuthContext';
 
 interface Article {
   id: string;
@@ -23,26 +24,9 @@ const convertToJapanTime = (timestamp: string) => {
   return japanTime;
 };
 
-const ArticleLists = (props: { categoryKey: number; id: string; searchBy: string }) => {
-  const [url, setUrl] = useState('');
-
-  useEffect(() => {
-    console.log('props.id:', props.id);
-    console.log('props.searchBy: ', props.searchBy);
-
-    switch (props.searchBy) {
-      case 'tag':
-        setUrl(`http://localhost:8080/posts/tags?id=${props.id}`);
-        break;
-      case 'curriculum':
-        setUrl(`http://localhost:8080/posts/curriculums?id=${props.id}`);
-        break;
-      default:
-        setUrl('http://localhost:8080/posts/date');
-        break;
-    }
-  }, [props.searchBy, props.id]);
-
+const LikedPosts = (props: { categoryKey: number }) => {
+  const { currentUser } = useContext(AuthContext);
+  const url = 'http://localhost:8080/posts/likes?id=' + currentUser?.uid;
   const { data } = useGetRequest(url);
 
   const timezoneSetData = data.map((item: Article) => {
@@ -162,7 +146,7 @@ const ArticleLists = (props: { categoryKey: number; id: string; searchBy: string
   };
 
   return (
-    <Box component="main" sx={{ flexGrow: 1, bgcolor: 'background.default', p: 3, marginTop: '64px', width: '100%' }}>
+    <Box component="main" sx={{ flexGrow: 1, p: 3, marginTop: '64px', width: '100%' }}>
       <Toolbar />
       <Box sx={{ justifyContent: 'center', width: '100%' }}>
         {(() => {
@@ -184,4 +168,4 @@ const ArticleLists = (props: { categoryKey: number; id: string; searchBy: string
   );
 };
 
-export default ArticleLists;
+export default LikedPosts;

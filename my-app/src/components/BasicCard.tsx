@@ -14,6 +14,7 @@ import DeleteMenu from './DeleteMenu';
 export default function BasicCard(props: {
   id: string;
   title: string;
+  url: string;
   content: string;
   user: string;
   updated_at: string;

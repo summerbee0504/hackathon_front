@@ -16,7 +16,7 @@ const ValidationTextField = styled(TextField)({
   },
   '& input:valid:focus + fieldset': {
     borderLeftWidth: 4,
-    padding: '4px !important' // override inline-style
+    padding: '4px !important'
   }
 });
 
@@ -25,7 +25,6 @@ const UserUpdateForm = () => {
   const [name, setName] = useState(currentUser?.displayName || '');
   const [term, setTerm] = useState<string | undefined>(undefined);
   const [bio, setBio] = useState<string | undefined>(undefined);
-  const email: string = currentUser?.email || '';
 
   const { data, loading, error, makePostRequest } = usePostRequest();
 
@@ -43,7 +42,7 @@ const UserUpdateForm = () => {
       bio
     });
 
-    const url = 'http://localhost:8080/signup'; //変える
+    const url = 'http://localhost:8080/signup';
 
     makePostRequest(url, postRequest);
     if (data.length !== 0) {
@@ -67,7 +66,7 @@ const UserUpdateForm = () => {
     <form className="Signup-form" onSubmit={submit}>
       <Status />
       <div className="form">
-        <div className="form-left">
+        <div className="form-top">
           <ValidationTextField
             label="Name"
             required
@@ -75,14 +74,7 @@ const UserUpdateForm = () => {
             margin="normal"
             value={name}
             onChange={(e) => setName(e.target.value)}
-          />
-          <ValidationTextField
-            label="Email"
-            required
-            variant="filled"
-            margin="normal"
-            value={email}
-            inputProps={{ readOnly: true }}
+            sx={{ mr: 2 }}
           />
           <ValidationTextField
             label="Term"
@@ -100,16 +92,17 @@ const UserUpdateForm = () => {
             variant="filled"
             margin="normal"
             multiline
-            rows={5}
-            maxRows={5}
+            rows={4}
+            maxRows={4}
             value={bio}
             onChange={(e) => setBio(e.target.value)}
+            sx={{ width: '100%' }}
           />
-          <Button className="submit-button" variant="contained" sx={{ mt: 2 }} type="submit">
-            Submit
-          </Button>
         </div>
       </div>
+      <Button className="submit-button" variant="contained" sx={{ mt: 2, mb: 3 }} type="submit">
+        Submit
+      </Button>
     </form>
   );
 };

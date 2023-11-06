@@ -1,0 +1,28 @@
+.Userdetail {
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 50px;
+}
+
+.Input-container {
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+h1 {
+  margin-top: 50px;
+  margin-bottom: 0px;
+}
+
+h2 {
+  margin-top: 10px;
+}
+
+.progress {
+  height: 20px;
+  margin-bottom: 40px;
+}

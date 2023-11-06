@@ -5,15 +5,15 @@
 
 .form {
   display: flex;
-}
-
-.form-left {
-  display: flex;
   flex-direction: column;
-  margin-right: 50px;
 }
 
-.form-right {
+.form-top {
+  display: flex;
+  flex-direction: row;
+}
+
+.form-bottom {
   display: flex;
   flex-direction: column;
 }

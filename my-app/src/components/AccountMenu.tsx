@@ -10,8 +10,8 @@ import Tooltip from '@mui/material/Tooltip';
 import Logout from '@mui/icons-material/Logout';
 import { AuthContext } from './AuthContext';
 import PersonIcon from '@mui/icons-material/Person';
-import { Link, useNavigate } from 'react-router-dom';
 import { auth } from './Firebase';
+import { useNavigate } from 'react-router-dom';
 
 export default function AccountMenu() {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
@@ -33,7 +33,7 @@ export default function AccountMenu() {
   };
 
   const handleMyAccount = () => {
-    navigate('/user');
+    navigate('/user/?id={currentUser?.uid}');
   };
 
   return (
