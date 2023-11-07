@@ -1,21 +1,15 @@
 .NewPostForm {
   display: flex;
   flex-direction: column;
+  width: 100%;
 }
 
 .form {
   display: flex;
   flex-direction: column;
-}
-
-.form-top {
-  display: flex;
-  flex-direction: row;
-}
-
-.form-bottom {
-  display: flex;
-  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
 }
 
 .status {

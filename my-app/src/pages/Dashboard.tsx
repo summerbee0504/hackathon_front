@@ -9,9 +9,7 @@ import ArticleLists from '../components/ArticleLists';
 import DashboardToolbar from '../components/DashboardToolbar';
 import { useState } from 'react';
 import AccountMenu from '../components/AccountMenu';
-import { IconButton } from '@mui/material';
-import AddIcon from '@mui/icons-material/Add';
-import { Link } from 'react-router-dom';
+import NewPostMenu from '../components/NewPostMenu';
 
 const drawerWidth = 240;
 
@@ -34,10 +32,10 @@ const Dashboard = () => {
   };
 
   return (
-    <Box sx={{ display: 'flex' }}>
+    <Box sx={{ display: 'flex', width: '100vw' }}>
       <CssBaseline />
       <AppBar position="fixed" sx={{ width: `calc(100% - ${drawerWidth}px)`, ml: `${drawerWidth}px` }}>
-        <Toolbar>
+        <Toolbar sx={{ height: '80px' }}>
           <Box display="flex" alignItems="center" justifyContent="space-between" width="100%">
             <Box>
               <Typography variant="h6" noWrap component="div">
@@ -45,9 +43,7 @@ const Dashboard = () => {
               </Typography>
             </Box>
             <Box display="flex" alignItems="center">
-              <IconButton component={Link} to={`./new`}>
-                <AddIcon />
-              </IconButton>
+              <NewPostMenu />
               <AccountMenu />
             </Box>
           </Box>

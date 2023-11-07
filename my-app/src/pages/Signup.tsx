@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import '../styles/Signup.css';
-import SignupForm from './SignupForm';
+import SignupForm from '../components/SignupForm';
 import { AuthContext } from '../components/AuthContext';
 import { Avatar } from '@mui/material';
 

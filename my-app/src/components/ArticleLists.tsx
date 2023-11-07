@@ -1,30 +1,19 @@
 import { Box, Toolbar } from '@mui/material';
-import BasicCard from './BasicCard';
 import { useEffect, useState } from 'react';
-import YouTube from 'react-youtube';
 import { useGetRequest } from './useGetRequest';
-
-interface Article {
-  id: string;
-  category: string;
-  user: string;
-  title: string;
-  url: string;
-  content: string;
-  curriculum: string;
-  created_at: string;
-  updated_at: string;
-}
+import ListItems from './ListItems';
+import { Article } from '../interfaces/Article';
+import SortButton from './SortButton';
 
 const convertToJapanTime = (timestamp: string) => {
   const date = new Date(timestamp);
   const japanTime = new Date(date.getTime() + 9 * 3600000);
-  console.log('japanTime: ', japanTime);
-  return japanTime;
+  return japanTime.toLocaleString();
 };
 
 const ArticleLists = (props: { categoryKey: number; id: string; searchBy: string }) => {
   const [url, setUrl] = useState('');
+  const [data, setData] = useState<Article[]>([]);
 
   useEffect(() => {
     console.log('props.id:', props.id);
@@ -43,140 +32,69 @@ const ArticleLists = (props: { categoryKey: number; id: string; searchBy: string
     }
   }, [props.searchBy, props.id]);
 
-  const { data } = useGetRequest(url);
+  const { data: fetchedData } = useGetRequest(url);
 
-  const timezoneSetData = data.map((item: Article) => {
-    return {
-      ...item,
-      created_at: convertToJapanTime(item.created_at).toLocaleString(),
-      updated_at: convertToJapanTime(item.updated_at).toLocaleString()
-    };
-  });
-
-  const articles = timezoneSetData.filter((item: Article) => item.category === 'ブログ記事');
-  const books = timezoneSetData.filter((item: Article) => item.category === '本');
-  const videos = timezoneSetData.filter((item: Article) => item.category === '動画');
-  const others = timezoneSetData.filter((item: Article) => item.category === 'その他');
-
-  const Articles = () => {
-    return (
-      <Box justifyContent="flex-start" sx={{ flexWrap: 'wrap', display: 'flex', flexDirection: 'row' }}>
-        {articles.map((item: Article, index) => (
-          <Box
-            key={index}
-            sx={{
-              p: 1,
-              m: 1
-            }}
-          >
-            <BasicCard
-              id={item.id}
-              title={item.title}
-              url={item.url}
-              content={item.content}
-              user={item.user}
-              updated_at={item.updated_at}
-            />
-          </Box>
-        ))}
-      </Box>
-    );
-  };
-
-  const Books = () => {
-    return (
-      <Box justifyContent="flex-start" sx={{ flexWrap: 'wrap', display: 'flex', flexDirection: 'row' }}>
-        {books.map((item: Article, index) => (
-          <Box
-            key={index}
-            sx={{
-              p: 1,
-              m: 1
-            }}
-          >
-            <BasicCard
-              key={item.id}
-              id={item.id}
-              title={item.title}
-              url={item.url}
-              content={item.content}
-              user={item.user}
-              updated_at={item.updated_at}
-            />
-          </Box>
-        ))}
-      </Box>
-    );
-  };
-
-  const opts = {
-    height: '200',
-    width: '300',
-    playerVars: {
-      autoplay: 0
+  useEffect(() => {
+    if (Array.isArray(fetchedData)) {
+      const timezoneSetData = fetchedData.map((item: Article) => ({
+        ...item,
+        created_at: convertToJapanTime(item.created_at),
+        updated_at: convertToJapanTime(item.updated_at)
+      }));
+      setData(timezoneSetData);
+      console.log('timezoneSetData: ', timezoneSetData);
     }
-  };
+  }, [fetchedData]);
 
-  const Videos = () => {
-    return (
-      <Box justifyContent="flex-start" sx={{ flexWrap: 'wrap', display: 'flex', flexDirection: 'row' }}>
-        {videos.map((item: Article, index) => (
-          <Box
-            key={index}
-            sx={{
-              p: 1,
-              m: 1
-            }}
-          >
-            <YouTube videoId={item.content} opts={opts} loading="lazy" />
-          </Box>
-        ))}
-      </Box>
-    );
-  };
+  const filteredArticles = data.filter((item: Article) => item.category === 'ブログ記事');
+  const filteredBooks = data.filter((item: Article) => item.category === '本');
+  const filteredVideos = data.filter((item: Article) => item.category === '動画');
+  const filteredOthers = data.filter((item: Article) => item.category === 'その他');
 
-  const Others = () => {
-    return (
-      <Box justifyContent="flex-start" sx={{ flexWrap: 'wrap', display: 'flex', flexDirection: 'row' }}>
-        {others.map((item: Article, index) => (
-          <Box
-            key={index}
-            sx={{
-              p: 1,
-              m: 1
-            }}
-          >
-            <BasicCard
-              key={item.id}
-              id={item.id}
-              title={item.title}
-              url={item.url}
-              content={item.content}
-              user={item.user}
-              updated_at={item.updated_at}
-            />
-          </Box>
-        ))}
-      </Box>
-    );
-  };
+  const [articles, setArticles] = useState<Article[]>(filteredArticles);
+  const [books, setBooks] = useState<Article[]>(filteredBooks);
+  const [videos, setVideos] = useState<Article[]>(filteredVideos);
+  const [others, setOthers] = useState<Article[]>(filteredOthers);
+
+  const updatedDescArticles = filteredArticles.sort((a: Article, b: Article) => (a.updated_at < b.updated_at ? 1 : -1));
+  const updatedDescBooks = filteredBooks.sort((a: Article, b: Article) => (a.updated_at < b.updated_at ? 1 : -1));
+  const updatedDescVideos = filteredVideos.sort((a: Article, b: Article) => (a.updated_at < b.updated_at ? 1 : -1));
+  const updatedDescOthers = filteredOthers.sort((a: Article, b: Article) => (a.updated_at < b.updated_at ? 1 : -1));
+
+  const [sortBy, setSortBy] = useState('created');
+
+  useEffect(() => {
+    if (sortBy === 'created') {
+      setArticles(filteredArticles);
+      setBooks(filteredBooks);
+      setVideos(filteredVideos);
+      setOthers(filteredOthers);
+    } else {
+      setArticles(updatedDescArticles);
+      setBooks(updatedDescBooks);
+      setVideos(updatedDescVideos);
+      setOthers(updatedDescOthers);
+    }
+  }, [sortBy, props.searchBy, props.id, data]);
 
   return (
-    <Box component="main" sx={{ flexGrow: 1, bgcolor: 'background.default', p: 3, marginTop: '64px', width: '100%' }}>
-      <Toolbar />
+    <Box component="main" sx={{ flexGrow: 1, p: 3, marginTop: '128px', width: '100%' }}>
+      <Toolbar sx={{ display: 'flex', alignItems: 'flex-start', width: '100%' }}>
+        <SortButton setSortBy={setSortBy} sortBy={sortBy} />
+      </Toolbar>
       <Box sx={{ justifyContent: 'center', width: '100%' }}>
         {(() => {
           switch (props.categoryKey) {
             case 1:
-              return <Articles />;
+              return <ListItems items={articles} />;
             case 2:
-              return <Books />;
+              return <ListItems items={books} />;
             case 3:
-              return <Videos />;
+              return <ListItems items={videos} />;
             case 4:
-              return <Others />;
+              return <ListItems items={others} />;
             default:
-              return null;
+              return <p>No items to display</p>;
           }
         })()}
       </Box>

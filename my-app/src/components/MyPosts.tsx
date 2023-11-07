@@ -12,15 +12,16 @@ const convertToJapanTime = (timestamp: string) => {
   return japanTime;
 };
 
-const LikedPosts = (props: { categoryKey: number }) => {
+const MyPosts = (props: { categoryKey: number }) => {
   const { currentUser } = useContext(AuthContext);
-  const url = 'http://localhost:8080/posts/likes?id=' + currentUser?.uid;
+  const url = 'http://localhost:8080/posts/user?id=' + currentUser?.uid;
   const { data: responseData } = useGetRequest(url);
   const [data, setData] = useState<Article[]>([]);
 
   useEffect(() => {
     if (Array.isArray(responseData)) {
       setData(responseData);
+      console.log('responseData: ', responseData);
     }
   }, [responseData]);
 
@@ -39,7 +40,7 @@ const LikedPosts = (props: { categoryKey: number }) => {
 
   return (
     <Box component="main" sx={{ p: 3, width: '100%' }}>
-      <Typography variant="h5">Liked Posts</Typography>
+      <Typography variant="h5">My Posts</Typography>
       <Box sx={{ justifyContent: 'center', width: '100%' }}>
         {(() => {
           switch (props.categoryKey) {
@@ -60,4 +61,4 @@ const LikedPosts = (props: { categoryKey: number }) => {
   );
 };
 
-export default LikedPosts;
+export default MyPosts;
