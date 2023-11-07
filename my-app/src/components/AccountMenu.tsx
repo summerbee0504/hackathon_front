@@ -49,9 +49,9 @@ export default function AccountMenu() {
             aria-expanded={open ? 'true' : undefined}
           >
             {userImage === '' ? (
-              <Avatar src="./defaultUserImage.png" alt="default user profile" sx={{ width: 32, height: 32 }} />
+              <Avatar src="./defaultUserImage.png" alt="default user profile" sx={{ width: 55, height: 55 }} />
             ) : (
-              <Avatar src={userImage} alt="user profile" sx={{ width: 32, height: 32 }} />
+              <Avatar src={userImage} alt="user profile" sx={{ width: 55, height: 55 }} />
             )}
           </IconButton>
         </Tooltip>

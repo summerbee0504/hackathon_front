@@ -2,7 +2,8 @@ import { createTheme } from '@mui/material/styles';
 
 export const CustomTheme = createTheme({
   typography: {
-    fontFamily: 'source-code-pro, Menlo, Monaco, Consolas, Courier New, monospace'
+    fontFamily: 'source-code-pro, Menlo, Monaco, Consolas, Courier New, monospace',
+    fontSize: 14
   },
   palette: {
     mode: 'dark',

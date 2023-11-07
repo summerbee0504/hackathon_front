@@ -1,7 +1,7 @@
 import { Box, Paper, Typography } from '@mui/material';
-import NewPostForm from '../components/NewPostForm';
+import UpdatePostForm from '../components/UpdatePostForm';
 
-const NewPost = () => {
+const EditPost = () => {
   return (
     <Box
       width="100%"
@@ -18,12 +18,12 @@ const NewPost = () => {
         sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column' }}
       >
         <Typography variant="h4" component="h1" gutterBottom>
-          New Post
+          Edit Post
         </Typography>
-        <NewPostForm />
+        <UpdatePostForm />
       </Box>
     </Box>
   );
 };
 
-export default NewPost;
+export default EditPost;

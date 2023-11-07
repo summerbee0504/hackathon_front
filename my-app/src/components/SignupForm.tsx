@@ -1,9 +1,9 @@
 import styled from '@emotion/styled';
-import { Button, TextField } from '@mui/material';
-import { useContext, useState } from 'react';
-import { AuthContext } from '../components/AuthContext';
+import { Box, Button, TextField } from '@mui/material';
+import { FormEvent, useContext, useState } from 'react';
+import { AuthContext } from './AuthContext';
 import '../styles/SignupForm.css';
-import { usePostRequest } from '../components/usePostRequest';
+import { usePostRequest } from './usePostRequest';
 
 const ValidationTextField = styled(TextField)({
   '& input:valid + fieldset': {
@@ -28,7 +28,7 @@ const SignupForm = () => {
 
   const { data, loading, error, makePostRequest } = usePostRequest();
 
-  const submit = (e: React.FormEvent<HTMLFormElement>) => {
+  const submit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (name === '' || term === undefined) {
       alert('Please fill out all required fields');
@@ -39,7 +39,9 @@ const SignupForm = () => {
       id: currentUser?.uid,
       name,
       term: parseInt(term),
-      bio
+      bio,
+      permisssion_id: 2,
+      image: currentUser?.photoURL
     });
 
     const url = 'http://localhost:8080/signup'; //変える
@@ -63,30 +65,28 @@ const SignupForm = () => {
     );
   };
   return (
-    <form className="Signup-form" onSubmit={submit}>
-      <Status />
-      <div className="form">
-        <div className="form-top">
-          <ValidationTextField
-            label="Name"
-            required
-            variant="filled"
-            margin="normal"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            sx={{ mr: 2 }}
-          />
-          <ValidationTextField
-            label="Term"
-            required
-            variant="filled"
-            margin="normal"
-            value={term}
-            type="number"
-            onChange={(e) => setTerm(e.target.value)}
-          />
-        </div>
-        <div className="form-right">
+    <form onSubmit={submit}>
+      <Box>
+        <Status />
+        <ValidationTextField
+          label="Name"
+          required
+          variant="filled"
+          margin="normal"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          sx={{ mr: 2 }}
+        />
+        <ValidationTextField
+          label="Term"
+          required
+          variant="filled"
+          margin="normal"
+          value={term}
+          type="number"
+          onChange={(e) => setTerm(e.target.value)}
+        />
+        <Box>
           <ValidationTextField
             label="Bio"
             variant="filled"
@@ -97,11 +97,11 @@ const SignupForm = () => {
             onChange={(e) => setBio(e.target.value)}
             sx={{ width: '100%' }}
           />
-        </div>
-      </div>
-      <Button className="submit-button" variant="contained" sx={{ mt: 2 }} type="submit">
-        Submit
-      </Button>
+        </Box>
+        <Button variant="contained" sx={{ mt: 2, width: '100%' }} type="submit">
+          Submit
+        </Button>
+      </Box>
     </form>
   );
 };
