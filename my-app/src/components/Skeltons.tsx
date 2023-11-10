@@ -1,7 +1,7 @@
 import { ThemeProvider } from '@emotion/react';
 import { Card, CardContent, Typography, CardActions, Button, ListItem, ListItemButton } from '@mui/material';
 import Skeleton from '@mui/material/Skeleton';
-import { CustomTheme } from './MuiTheme';
+import { CustomTheme } from '../styles/MuiTheme';
 
 const ListLoadingAnimation = () => {
   return (
