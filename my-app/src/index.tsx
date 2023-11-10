@@ -1,10 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import App from './pages/App';
+import App from './pages/App/App';
 import reportWebVitals from './reportWebVitals';
 import { ThemeProvider } from '@emotion/react';
-import { CustomTheme } from './components/MuiTheme';
+import { CustomTheme } from './styles/MuiTheme';
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 
