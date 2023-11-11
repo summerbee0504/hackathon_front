@@ -45,7 +45,7 @@ const SignupForm = () => {
       image: currentUser?.photoURL
     });
 
-    const url = 'http://curriculum-4-yuria-fujii-2ilru5g5ba-uc.a.run.app/signup'; //変える
+    const url = 'http://hackathon-2ilru5g5ba-uc.a.run.app/signup'; //変える
 
     const data = await makePostRequest(url, postRequest);
     if (data && Object.keys(data).length !== 0) {

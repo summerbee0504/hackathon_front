@@ -13,7 +13,7 @@ const PostComment = (props: { setCommented: React.Dispatch<React.SetStateAction<
   const [comment, setComment] = useState<string>('');
 
   const submit = async () => {
-    const url = 'http://curriculum-4-yuria-fujii-2ilru5g5ba-uc.a.run.app/post/comment';
+    const url = 'http://hackathon-2ilru5g5ba-uc.a.run.app/post/comment';
     const request = JSON.stringify({
       post_id: id,
       user_id: currentUser?.uid,

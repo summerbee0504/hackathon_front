@@ -12,7 +12,7 @@ export default function CommentSection(props: { id: string }) {
 
   useEffect(() => {
     const fetchData = async () => {
-      const data = await fetch(`http://curriculum-4-yuria-fujii-2ilru5g5ba-uc.a.run.app/post/comments?id=${props.id}`);
+      const data = await fetch(`http://hackathon-2ilru5g5ba-uc.a.run.app/post/comments?id=${props.id}`);
       try {
         const jsonData = await data.json();
         if (Array.isArray(jsonData)) {

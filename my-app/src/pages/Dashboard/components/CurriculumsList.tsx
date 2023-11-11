@@ -13,7 +13,7 @@ export const CurriculumsList = (props: {
   setSearchBy: (newSearchBy: string) => void;
   setToolbarTitle: (newToolbarTitle: string) => void;
 }) => {
-  const url = 'http://curriculum-4-yuria-fujii-2ilru5g5ba-uc.a.run.app/posts/curriculums/all';
+  const url = 'http://hackathon-2ilru5g5ba-uc.a.run.app/posts/curriculums/all';
 
   const { data: reqestedData, loading } = useGetRequest(url);
   const [data, setData] = useState<Category[]>([]);
