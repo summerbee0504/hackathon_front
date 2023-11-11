@@ -45,9 +45,6 @@ export default function CurriculumSelecter(props: { setCurriculumId: Function; c
           size="small"
           MenuProps={{ PaperProps: { style: { maxHeight: 200 } } }} // スクロール可能なメニュー
         >
-          <MenuItem value="">
-            <em>None</em>
-          </MenuItem>
           {data.map((curriculum: Curriculum) => (
             <MenuItem key={curriculum.id} value={curriculum.id} sx={{ height: '35px' }}>
               <Typography variant="body1">{curriculum.curriculum}</Typography>

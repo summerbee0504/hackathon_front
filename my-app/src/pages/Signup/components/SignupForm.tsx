@@ -40,7 +40,7 @@ const SignupForm = () => {
       id: currentUser?.uid,
       name,
       term: parseInt(term),
-      bio,
+      bio: '',
       permission_id: 2,
       image: currentUser?.photoURL
     });
@@ -79,19 +79,6 @@ const SignupForm = () => {
           onChange={(e) => setTerm(e.target.value)}
           autoComplete="off"
         />
-        <Box>
-          <ValidationTextField
-            label="Bio"
-            variant="filled"
-            margin="normal"
-            multiline
-            rows={4}
-            value={bio}
-            onChange={(e) => setBio(e.target.value)}
-            sx={{ width: '100%' }}
-            autoComplete="off"
-          />
-        </Box>
         <Button variant="contained" sx={{ mt: 2, width: '100%' }} type="submit">
           Submit
         </Button>
