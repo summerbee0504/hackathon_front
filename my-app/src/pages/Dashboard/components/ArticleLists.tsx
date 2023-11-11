@@ -18,13 +18,13 @@ const ArticleLists = (props: { categoryKey: number; id: string; searchBy: string
   useEffect(() => {
     switch (props.searchBy) {
       case 'tag':
-        setUrl(`http://curriculum-4-yuria-fujii-2ilru5g5ba-uc.a.run.app/posts/tags?id=${props.id}`);
+        setUrl(`http://hackathon-2ilru5g5ba-uc.a.run.app/posts/tags?id=${props.id}`);
         break;
       case 'curriculum':
-        setUrl(`http://curriculum-4-yuria-fujii-2ilru5g5ba-uc.a.run.app/posts/curriculums?id=${props.id}`);
+        setUrl(`http://hackathon-2ilru5g5ba-uc.a.run.app/posts/curriculums?id=${props.id}`);
         break;
       default:
-        setUrl('http://curriculum-4-yuria-fujii-2ilru5g5ba-uc.a.run.app/posts/date');
+        setUrl('http://hackathon-2ilru5g5ba-uc.a.run.app/posts/date');
         break;
     }
   }, [props.searchBy, props.id]);

@@ -9,7 +9,7 @@ import { HomeButton } from '../../components/HomeButton';
 
 const PostDetail = () => {
   const { id } = useParams();
-  const postdataRequestUrl = `http://curriculum-4-yuria-fujii-2ilru5g5ba-uc.a.run.app/post?id=${id}`;
+  const postdataRequestUrl = `http://hackathon-2ilru5g5ba-uc.a.run.app/post?id=${id}`;
   const { data: requestedData } = useGetRequest(postdataRequestUrl);
 
   const [data, setData] = useState<Article>({} as Article);

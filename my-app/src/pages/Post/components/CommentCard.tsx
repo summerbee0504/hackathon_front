@@ -4,7 +4,7 @@ import { Comment } from '../../../interfaces/Commet';
 import CardMenu from '../../../components/CardMenu';
 
 const CommentCard = (props: { comment: Comment }) => {
-  const deleteReqestUrl = `http://curriculum-4-yuria-fujii-2ilru5g5ba-uc.a.run.app/post/comment/delete?id=${props.comment.id}`;
+  const deleteReqestUrl = `http://hackathon-2ilru5g5ba-uc.a.run.app/post/comment/delete?id=${props.comment.id}`;
 
   return (
     <>
