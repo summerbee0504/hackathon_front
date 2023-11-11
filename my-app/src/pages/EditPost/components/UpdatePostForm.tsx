@@ -60,8 +60,6 @@ const UpdatePostForm = () => {
       curriculum_id: curriculumId
     });
 
-    console.log('postRequest', postRequest);
-
     const requestUrl = `https://hackathon-2ilru5g5ba-uc.a.run.app/post/update?id=${id}`;
 
     const data = await makePostRequest(requestUrl, postRequest);

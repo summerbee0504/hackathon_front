@@ -20,7 +20,10 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import LinesEllipsis from 'react-lines-ellipsis';
 import { FixedArticle } from '../interfaces/FixedArticle';
 
-export default function BasicCard(props: { item: FixedArticle }) {
+export default function BasicCard(props: {
+  item: FixedArticle;
+  setDeleted: React.Dispatch<React.SetStateAction<boolean>>;
+}) {
   const { currentUser } = useContext(AuthContext);
   const { loading, data } = useGetRequest(
     'https://hackathon-2ilru5g5ba-uc.a.run.app/posts/likes?id=' + currentUser?.uid
@@ -29,17 +32,11 @@ export default function BasicCard(props: { item: FixedArticle }) {
   const [liked, setLiked] = useState<boolean | null>(null);
   const [isOwner, setIsOwner] = useState<boolean>(false);
 
-  console.log(props.item);
-
   useEffect(() => {
     if (currentUser?.uid === props.item.user_id) {
       setIsOwner(true);
-      console.log(isOwner);
     } else {
       setIsOwner(false);
-      console.log(isOwner);
-      console.log(currentUser?.uid);
-      console.log(props.item.user_id);
     }
   }, [props.item.user_id, currentUser?.uid, isOwner]);
 
@@ -93,6 +90,7 @@ export default function BasicCard(props: { item: FixedArticle }) {
                 requestUrl="https://hackathon-2ilru5g5ba-uc.a.run.app/post/delete?id="
                 edit={true}
                 isOwner={isOwner}
+                setDeleted={props.setDeleted}
               />
             </Box>
           </Box>

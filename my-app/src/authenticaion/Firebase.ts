@@ -11,15 +11,6 @@ const firebaseConfig = {
   appId: process.env.REACT_APP_APP_ID
 };
 
-// const firebaseConfig = {
-//   apiKey: 'AIzaSyA61JtjAgZN9pMSqdCcfqQuVvRBY7GefWk',
-//   authDomain: 'term4-yuria-fujii.firebaseapp.com',
-//   projectId: 'term4-yuria-fujii',
-//   storageBucket: 'term4-yuria-fujii.appspot.com',
-//   messagingSenderId: '129982847412',
-//   appId: '1:129982847412:web:c41b3edab567047d8abae1'
-// };
-
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 

@@ -19,12 +19,10 @@ const PostContent = (props: { id: string; post: Article }) => {
   const userImage = props.post.user_image ? props.post.user_image : './defaultUserImage.png';
   const Owner = props.post.user_id === currentUser?.uid;
   const [likecount, setLikecount] = useState<number>(0);
-  console.log('post', props.post);
 
   useEffect(() => {
     if (props.post.like_count) {
       setLikecount(props.post.like_count);
-      console.log('likecount', likecount);
     }
   }, [props.post.like_count]);
 

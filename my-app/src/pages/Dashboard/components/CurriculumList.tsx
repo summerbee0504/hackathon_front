@@ -8,7 +8,7 @@ interface Category {
   curriculum: string;
 }
 
-export const CurriculumsList = (props: {
+export const CurriculumList = (props: {
   setId: (newId: string) => void;
   setSearchBy: (newSearchBy: string) => void;
   setToolbarTitle: (newToolbarTitle: string) => void;
@@ -21,7 +21,6 @@ export const CurriculumsList = (props: {
   useEffect(() => {
     if (reqestedData! && Array.isArray(reqestedData)) {
       setData(reqestedData);
-      console.log('reqestedData: ', reqestedData);
     }
   }, [reqestedData]);
 
