@@ -50,7 +50,7 @@ const NewPostForm = () => {
       curriculum_id: curriculumId
     });
 
-    const requestUrl = 'http://hackathon-2ilru5g5ba-uc.a.run.app/post/new';
+    const requestUrl = 'https://hackathon-2ilru5g5ba-uc.a.run.app/post/new';
 
     const data = await makePostRequest(requestUrl, postRequest);
 

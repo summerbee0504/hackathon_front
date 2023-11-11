@@ -25,7 +25,7 @@ const ValidationTextField = styled(TextField)({
 
 const UpdatePostForm = () => {
   const { id } = useParams();
-  const getUrl = `http://hackathon-2ilru5g5ba-uc.a.run.app/post?id=${id}`;
+  const getUrl = `https://hackathon-2ilru5g5ba-uc.a.run.app/post?id=${id}`;
   const { data: getData } = useGetRequest(getUrl);
   const [title, setTitle] = useState(getData.title || '');
   const [url, setUrl] = useState(getData.url || '');
@@ -62,7 +62,7 @@ const UpdatePostForm = () => {
 
     console.log('postRequest', postRequest);
 
-    const requestUrl = `http://hackathon-2ilru5g5ba-uc.a.run.app/post/update?id=${id}`;
+    const requestUrl = `https://hackathon-2ilru5g5ba-uc.a.run.app/post/update?id=${id}`;
 
     const data = await makePostRequest(requestUrl, postRequest);
     if (data !== 0 && !error && !loading) {

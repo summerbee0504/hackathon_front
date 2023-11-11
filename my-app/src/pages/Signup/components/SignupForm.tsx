@@ -45,7 +45,7 @@ const SignupForm = () => {
       image: currentUser?.photoURL
     });
 
-    const url = 'http://hackathon-2ilru5g5ba-uc.a.run.app/signup'; //変える
+    const url = 'https://hackathon-2ilru5g5ba-uc.a.run.app/signup'; //変える
 
     const data = await makePostRequest(url, postRequest);
     if (data && Object.keys(data).length !== 0) {
