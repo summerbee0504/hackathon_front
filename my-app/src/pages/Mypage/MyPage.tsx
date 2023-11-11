@@ -19,7 +19,7 @@ interface user {
 const Mypage = () => {
   const { currentUser } = useContext(AuthContext);
   const userImage = currentUser?.photoURL || '';
-  const url = 'http://localhost:8080/user?id=' + currentUser?.uid;
+  const url = 'http://curriculum-4-yuria-fujii-2ilru5g5ba-uc.a.run.app/user?id=' + currentUser?.uid;
   const { data: reqestedData } = useGetRequest(url);
   const [user, setUser] = useState<user>({ id: '', name: '', term: 0, bio: '', permission: 'user' });
 

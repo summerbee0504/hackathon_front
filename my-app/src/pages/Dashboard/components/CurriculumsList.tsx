@@ -1,6 +1,7 @@
 import { List, ListItem, ListItemButton, ListItemText } from '@mui/material';
 import { useGetRequest } from '../../../hooks/useGetRequest';
 import { ListLoadingAnimation } from '../../../components/Skeltons';
+import { useEffect, useState } from 'react';
 
 interface Category {
   id: string;
@@ -12,9 +13,17 @@ export const CurriculumsList = (props: {
   setSearchBy: (newSearchBy: string) => void;
   setToolbarTitle: (newToolbarTitle: string) => void;
 }) => {
-  const url = 'http://localhost:8080/posts/curriculums/all';
+  const url = 'http://curriculum-4-yuria-fujii-2ilru5g5ba-uc.a.run.app/posts/curriculums/all';
 
-  const { data, loading } = useGetRequest(url);
+  const { data: reqestedData, loading } = useGetRequest(url);
+  const [data, setData] = useState<Category[]>([]);
+
+  useEffect(() => {
+    if (reqestedData! && Array.isArray(reqestedData)) {
+      setData(reqestedData);
+      console.log('reqestedData: ', reqestedData);
+    }
+  }, [reqestedData]);
 
   const handleClick = (id: string, curriculum: string) => {
     props.setId(id);

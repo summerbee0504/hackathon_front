@@ -22,7 +22,7 @@ import { FixedArticle } from '../interfaces/FixedArticle';
 
 export default function BasicCard(props: { item: FixedArticle }) {
   const { currentUser } = useContext(AuthContext);
-  const { loading, data } = useGetRequest('http://localhost:8080/posts/likes?id=' + currentUser?.uid);
+  const { loading, data } = useGetRequest('http://curriculum-4-yuria-fujii-2ilru5g5ba-uc.a.run.app/posts/likes?id=' + currentUser?.uid);
   const { makePostRequest } = usePostRequest();
   const [liked, setLiked] = useState<boolean | null>(null);
   const [isOwner, setIsOwner] = useState<boolean>(false);
@@ -56,12 +56,12 @@ export default function BasicCard(props: { item: FixedArticle }) {
   const handleLike = () => {
     if (!liked) {
       makePostRequest(
-        'http://localhost:8080/post/like',
+        'http://curriculum-4-yuria-fujii-2ilru5g5ba-uc.a.run.app/post/like',
         JSON.stringify({ post_id: props.item.id, user_id: currentUser?.uid })
       );
     } else {
       makePostRequest(
-        'http://localhost:8080/post/unlike',
+        'http://curriculum-4-yuria-fujii-2ilru5g5ba-uc.a.run.app/post/unlike',
         JSON.stringify({ post_id: props.item.id, user_id: currentUser?.uid })
       );
     }
@@ -88,7 +88,7 @@ export default function BasicCard(props: { item: FixedArticle }) {
               <CardMenu
                 id={props.item.id}
                 handleEdit={handleEdit}
-                requestUrl="http://localhost:8080/post/delete?id="
+                requestUrl="http://curriculum-4-yuria-fujii-2ilru5g5ba-uc.a.run.app/post/delete?id="
                 edit={true}
                 isOwner={isOwner}
               />
