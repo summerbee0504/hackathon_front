@@ -14,7 +14,7 @@ const convertToJapanTime = (timestamp: string) => {
 
 const MyPosts = (props: { categoryKey: number }) => {
   const { currentUser } = useContext(AuthContext);
-  const url = 'http://hackathon-2ilru5g5ba-uc.a.run.app/posts/user?id=' + currentUser?.uid;
+  const url = 'https://hackathon-2ilru5g5ba-uc.a.run.app/posts/user?id=' + currentUser?.uid;
   const { data: responseData } = useGetRequest(url);
   const [data, setData] = useState<Article[]>([]);
 

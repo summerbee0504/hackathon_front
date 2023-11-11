@@ -12,7 +12,7 @@ import EditIcon from '@mui/icons-material/Edit';
 
 const PostContent = (props: { id: string; post: Article }) => {
   const { currentUser } = useContext(AuthContext);
-  const likedataRequestUrl = 'http://hackathon-2ilru5g5ba-uc.a.run.app/posts/likes?id=' + currentUser?.uid;
+  const likedataRequestUrl = 'https://hackathon-2ilru5g5ba-uc.a.run.app/posts/likes?id=' + currentUser?.uid;
   const { data: likedData } = useGetRequest(likedataRequestUrl);
   const [liked, setLiked] = useState<boolean | null>(null);
   const { makePostRequest } = usePostRequest();
@@ -39,13 +39,13 @@ const PostContent = (props: { id: string; post: Article }) => {
   const handleLike = () => {
     if (!liked) {
       makePostRequest(
-        'http://hackathon-2ilru5g5ba-uc.a.run.app/post/like',
+        'https://hackathon-2ilru5g5ba-uc.a.run.app/post/like',
         JSON.stringify({ post_id: props.id, user_id: currentUser?.uid })
       );
       setLikecount(likecount + 1);
     } else {
       makePostRequest(
-        'http://hackathon-2ilru5g5ba-uc.a.run.app/post/unlike',
+        'https://hackathon-2ilru5g5ba-uc.a.run.app/post/unlike',
         JSON.stringify({ post_id: props.id, user_id: currentUser?.uid })
       );
       setLikecount(likecount - 1);

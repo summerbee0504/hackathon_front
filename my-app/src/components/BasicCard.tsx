@@ -23,7 +23,7 @@ import { FixedArticle } from '../interfaces/FixedArticle';
 export default function BasicCard(props: { item: FixedArticle }) {
   const { currentUser } = useContext(AuthContext);
   const { loading, data } = useGetRequest(
-    'http://hackathon-2ilru5g5ba-uc.a.run.app/posts/likes?id=' + currentUser?.uid
+    'https://hackathon-2ilru5g5ba-uc.a.run.app/posts/likes?id=' + currentUser?.uid
   );
   const { makePostRequest } = usePostRequest();
   const [liked, setLiked] = useState<boolean | null>(null);
@@ -58,12 +58,12 @@ export default function BasicCard(props: { item: FixedArticle }) {
   const handleLike = () => {
     if (!liked) {
       makePostRequest(
-        'http://hackathon-2ilru5g5ba-uc.a.run.app/post/like',
+        'https://hackathon-2ilru5g5ba-uc.a.run.app/post/like',
         JSON.stringify({ post_id: props.item.id, user_id: currentUser?.uid })
       );
     } else {
       makePostRequest(
-        'http://hackathon-2ilru5g5ba-uc.a.run.app/post/unlike',
+        'https://hackathon-2ilru5g5ba-uc.a.run.app/post/unlike',
         JSON.stringify({ post_id: props.item.id, user_id: currentUser?.uid })
       );
     }
@@ -90,7 +90,7 @@ export default function BasicCard(props: { item: FixedArticle }) {
               <CardMenu
                 id={props.item.id}
                 handleEdit={handleEdit}
-                requestUrl="http://hackathon-2ilru5g5ba-uc.a.run.app/post/delete?id="
+                requestUrl="https://hackathon-2ilru5g5ba-uc.a.run.app/post/delete?id="
                 edit={true}
                 isOwner={isOwner}
               />
