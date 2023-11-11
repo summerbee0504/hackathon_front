@@ -56,7 +56,7 @@ const NewPostForm = () => {
 
     if (!error && !loading) {
       setTimeout(() => {
-        window.location.href = '/edit/' + data.post_id;
+        window.location.href = '/post/' + data.post_id;
       }, 1000);
     }
   };

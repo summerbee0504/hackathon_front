@@ -1,6 +1,5 @@
 import { Box, Typography } from '@mui/material';
 import { useContext, useEffect, useState } from 'react';
-import { useGetRequest } from '../../../hooks/useGetRequest';
 import { AuthContext } from '../../../authenticaion/AuthContext';
 import ListItems from '../../Dashboard/components/ListItems';
 import { Article } from '../../../interfaces/Article';
@@ -14,28 +13,39 @@ const convertToJapanTime = (timestamp: string) => {
 
 const LikedPosts = (props: { categoryKey: number }) => {
   const { currentUser } = useContext(AuthContext);
-  const url = 'https://hackathon-2ilru5g5ba-uc.a.run.app/posts/likes?id=' + currentUser?.uid;
-  const { data: responseData } = useGetRequest(url);
-  const [data, setData] = useState<Article[]>([]);
+  const [articles, setArticles] = useState<FixedArticle[]>([]);
+  const [books, setBooks] = useState<FixedArticle[]>([]);
+  const [videos, setVideos] = useState<FixedArticle[]>([]);
+  const [others, setOthers] = useState<FixedArticle[]>([]);
+  const [deleted, setDeleted] = useState<boolean>(false);
 
   useEffect(() => {
-    if (Array.isArray(responseData)) {
-      setData(responseData);
-    }
-  }, [responseData]);
-
-  const timezoneSetData = data.map((item: Article) => {
-    return {
-      ...item,
-      created_at: convertToJapanTime(item.created_at),
-      updated_at: convertToJapanTime(item.updated_at)
+    const fetchData = async () => {
+      const data = await fetch(`https://hackathon-2ilru5g5ba-uc.a.run.app/posts/likes?id=${currentUser?.uid}`);
+      try {
+        const jsonData = await data.json();
+        if (Array.isArray(jsonData)) {
+          const timezoneSetData = jsonData.map((item: Article) => ({
+            ...item,
+            created_at: convertToJapanTime(item.created_at),
+            updated_at: convertToJapanTime(item.updated_at)
+          }));
+          const filteredArticles = timezoneSetData.filter((item: FixedArticle) => item.category === 'ブログ記事');
+          const filteredBooks = timezoneSetData.filter((item: FixedArticle) => item.category === '本');
+          const filteredVideos = timezoneSetData.filter((item: FixedArticle) => item.category === '動画');
+          const filteredOthers = timezoneSetData.filter((item: FixedArticle) => item.category === 'その他');
+          setArticles(filteredArticles);
+          setBooks(filteredBooks);
+          setVideos(filteredVideos);
+          setOthers(filteredOthers);
+        }
+      } catch (error) {
+        console.log(error);
+      }
     };
-  });
-
-  const articles = timezoneSetData.filter((item: FixedArticle) => item.category === 'ブログ記事');
-  const books = timezoneSetData.filter((item: FixedArticle) => item.category === '本');
-  const videos = timezoneSetData.filter((item: FixedArticle) => item.category === '動画');
-  const others = timezoneSetData.filter((item: FixedArticle) => item.category === 'その他');
+    fetchData();
+    setDeleted(false);
+  }, [currentUser?.uid, deleted]);
 
   return (
     <Box component="main" sx={{ p: 3, width: '100%' }}>
@@ -44,13 +54,13 @@ const LikedPosts = (props: { categoryKey: number }) => {
         {(() => {
           switch (props.categoryKey) {
             case 1:
-              return <ListItems items={articles} />;
+              return <ListItems items={articles} setDeleted={setDeleted} />;
             case 2:
-              return <ListItems items={books} />;
+              return <ListItems items={books} setDeleted={setDeleted} />;
             case 3:
-              return <ListItems items={videos} />;
+              return <ListItems items={videos} setDeleted={setDeleted} />;
             case 4:
-              return <ListItems items={others} />;
+              return <ListItems items={others} setDeleted={setDeleted} />;
             default:
               return null;
           }

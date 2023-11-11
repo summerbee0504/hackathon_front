@@ -12,7 +12,7 @@ export const TagsList = (props: {
   setSearchBy: (newSearchBy: string) => void;
   setToolbarTitle: (newToolbarTitle: string) => void;
 }) => {
-  const url = 'https://hackathon-2ilru5g5ba-uc.a.run.app/posts/tags/all';
+  const url = 'http://hackathon-2ilru5g5ba-uc.a.run.app/posts/tags/all';
 
   const { data, loading } = useGetRequest(url);
 

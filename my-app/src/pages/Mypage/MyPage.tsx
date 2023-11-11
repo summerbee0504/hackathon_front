@@ -26,8 +26,10 @@ const Mypage = () => {
   useEffect(() => {
     if (reqestedData) {
       setUser(reqestedData);
+      console.log('ユーザー', reqestedData);
+      console.log('userid', currentUser?.uid);
     }
-  }, [reqestedData]);
+  }, [reqestedData, currentUser?.uid]);
 
   const [categoryKey, setCategoryKey] = useState(1);
   const handleSetKey = (newKey: number) => {

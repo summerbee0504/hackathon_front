@@ -20,7 +20,6 @@ const PostComment = (props: { setCommented: React.Dispatch<React.SetStateAction<
       content: comment
     });
     const data = await makePostRequest(url, request);
-    console.log('data', data);
     if (data) {
       setComment('');
       props.setCommented(true);

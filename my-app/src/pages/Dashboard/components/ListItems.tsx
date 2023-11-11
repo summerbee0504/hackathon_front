@@ -2,7 +2,7 @@ import { Box } from '@mui/material';
 import BasicCard from '../../../components/BasicCard';
 import { FixedArticle } from '../../../interfaces/FixedArticle';
 
-const ListItems = (props: { items: FixedArticle[] }) => {
+const ListItems = (props: { items: FixedArticle[]; setDeleted: React.Dispatch<React.SetStateAction<boolean>> }) => {
   return (
     <Box justifyContent="flex-start" sx={{ flexWrap: 'wrap', display: 'flex', flexDirection: 'row' }}>
       {props.items.map((item: FixedArticle, index) => (
@@ -13,7 +13,7 @@ const ListItems = (props: { items: FixedArticle[] }) => {
             m: 1
           }}
         >
-          <BasicCard item={item} />
+          <BasicCard item={item} setDeleted={props.setDeleted} />
         </Box>
       ))}
     </Box>

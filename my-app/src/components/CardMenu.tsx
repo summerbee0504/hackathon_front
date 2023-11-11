@@ -11,6 +11,7 @@ export default function CardMenu(props: {
   handleEdit?: () => void;
   edit: boolean;
   isOwner?: boolean;
+  setDeleted?: React.Dispatch<React.SetStateAction<boolean>>;
 }) {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
@@ -29,9 +30,7 @@ export default function CardMenu(props: {
     const postRequest = JSON.stringify({ id: props.id });
 
     makePostRequest(requestUrl, postRequest);
-    setTimeout(() => {
-      window.location.reload();
-    }, 1000);
+    props.setDeleted!(true);
   };
 
   return (

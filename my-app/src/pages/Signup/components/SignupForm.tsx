@@ -41,7 +41,7 @@ const SignupForm = () => {
       name,
       term: parseInt(term),
       bio,
-      permisssion_id: 2,
+      permission_id: 2,
       image: currentUser?.photoURL
     });
 
