@@ -25,7 +25,7 @@ const ValidationTextField = styled(TextField)({
 
 const UpdatePostForm = () => {
   const { id } = useParams();
-  const getUrl = `http://localhost:8080/post?id=${id}`;
+  const getUrl = `http://curriculum-4-yuria-fujii-2ilru5g5ba-uc.a.run.app/post?id=${id}`;
   const { data: getData } = useGetRequest(getUrl);
   const [title, setTitle] = useState(getData.title || '');
   const [url, setUrl] = useState(getData.url || '');
@@ -62,7 +62,7 @@ const UpdatePostForm = () => {
 
     console.log('postRequest', postRequest);
 
-    const requestUrl = `http://localhost:8080/post/update?id=${id}`;
+    const requestUrl = `http://curriculum-4-yuria-fujii-2ilru5g5ba-uc.a.run.app/post/update?id=${id}`;
 
     const data = await makePostRequest(requestUrl, postRequest);
     if (data !== 0 && !error && !loading) {

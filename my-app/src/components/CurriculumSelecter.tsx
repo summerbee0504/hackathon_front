@@ -20,7 +20,7 @@ export default function CurriculumSelecter(props: { setCurriculumId: Function; c
   const [open, setOpen] = React.useState(false);
   const [data, setData] = React.useState<Curriculum[]>([]);
 
-  const url = 'http://localhost:8080/posts/curriculums/all';
+  const url = 'http://curriculum-4-yuria-fujii-2ilru5g5ba-uc.a.run.app/posts/curriculums/all';
 
   const { data: responseData } = useGetRequest(url);
 

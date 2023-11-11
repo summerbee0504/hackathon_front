@@ -50,7 +50,7 @@ const NewPostForm = () => {
       curriculum_id: curriculumId
     });
 
-    const requestUrl = 'http://localhost:8080/post/new';
+    const requestUrl = 'http://curriculum-4-yuria-fujii-2ilru5g5ba-uc.a.run.app/post/new';
 
     const data = await makePostRequest(requestUrl, postRequest);
 
