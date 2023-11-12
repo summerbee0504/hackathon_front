@@ -31,6 +31,7 @@ export default function CardMenu(props: {
 
     makePostRequest(requestUrl, postRequest);
     props.setDeleted!(true);
+    handleClose();
   };
 
   return (
