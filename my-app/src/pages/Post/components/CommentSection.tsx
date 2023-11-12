@@ -9,6 +9,7 @@ import { convertToJapanTime } from '../../../functions/convertToJapanTime';
 export default function CommentSection(props: { id: string }) {
   const [data, setData] = React.useState<Comment[]>([]);
   const [commented, setCommented] = React.useState<boolean>(false);
+  const [deleted, setDeleted] = React.useState<boolean>(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -29,12 +30,13 @@ export default function CommentSection(props: { id: string }) {
     };
     fetchData();
     setCommented(false);
-  }, [commented, props.id]);
+    setDeleted(false);
+  }, [commented, props.id, deleted]);
 
   return (
     <List sx={{ width: '100%', maxWidth: 360, borderRadius: '5px' }}>
       {data.map((item, index) => (
-        <CommentCard comment={item} key={index} />
+        <CommentCard comment={item} key={index} setDeleted={setDeleted} />
       ))}
       <PostComment setCommented={setCommented} />
     </List>

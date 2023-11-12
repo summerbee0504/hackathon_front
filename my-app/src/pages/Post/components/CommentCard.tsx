@@ -3,7 +3,7 @@ import React from 'react';
 import { Comment } from '../../../interfaces/Commet';
 import CardMenu from '../../../components/CardMenu';
 
-const CommentCard = (props: { comment: Comment }) => {
+const CommentCard = (props: { comment: Comment; setDeleted: React.Dispatch<React.SetStateAction<boolean>> }) => {
   const deleteReqestUrl = `https://hackathon-2ilru5g5ba-uc.a.run.app/post/comment/delete?id=${props.comment.id}`;
 
   return (
@@ -16,7 +16,7 @@ const CommentCard = (props: { comment: Comment }) => {
           <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', width: '100%' }}>
             <Box sx={{ width: '100%', display: 'flex', justifyContent: 'flex-end', mb: '0' }}>
               <ListItemText primary={props.comment.user} />
-              <CardMenu id={props.comment.id} requestUrl={deleteReqestUrl} edit={false} />
+              <CardMenu id={props.comment.id} requestUrl={deleteReqestUrl} edit={false} setDeleted={props.setDeleted} />
             </Box>
             <ListItemText
               sx={{ width: '100%', mt: '0' }}
