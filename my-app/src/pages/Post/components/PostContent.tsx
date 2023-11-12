@@ -9,6 +9,7 @@ import { useContext, useEffect, useState } from 'react';
 import YouTube from 'react-youtube';
 import { Link } from 'react-router-dom';
 import EditIcon from '@mui/icons-material/Edit';
+import ReactMarkdown from 'react-markdown';
 
 const PostContent = (props: { id: string; post: Article }) => {
   const { currentUser } = useContext(AuthContext);
@@ -146,12 +147,11 @@ const PostContent = (props: { id: string; post: Article }) => {
           width="100%"
           sx={{
             pr: '20px',
-            pl: '20px'
+            pl: '20px',
+            whiteSpace: 'pre-wrap'
           }}
         >
-          <Typography variant="body1" gutterBottom>
-            {props.post.content}
-          </Typography>
+          {props.post.content ? <ReactMarkdown>{props.post.content}</ReactMarkdown> : null}
         </Box>
       </Box>
       {props.post.category === '動画' ? (
