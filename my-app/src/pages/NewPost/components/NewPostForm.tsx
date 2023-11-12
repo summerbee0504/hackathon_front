@@ -54,7 +54,7 @@ const NewPostForm = () => {
 
     const data = await makePostRequest(requestUrl, postRequest);
 
-    if (!error && !loading) {
+    if (!error && !loading && currentUser) {
       setTimeout(() => {
         window.location.href = '/post/' + data.post_id;
       }, 1000);
