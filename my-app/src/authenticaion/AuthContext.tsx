@@ -1,6 +1,7 @@
 import React, { createContext, useEffect, useState } from 'react';
 import { auth } from './Firebase';
 import { User } from 'firebase/auth';
+import { CircularProgress } from '@mui/material';
 
 interface IAuthContext {
   currentUser: User | null | undefined;
@@ -22,18 +23,19 @@ const AuthProvider = (props: any) => {
   useEffect(() => {
     return auth.onAuthStateChanged((user) => {
       setCurrentUser(user);
-      setLoading(false);
       setIsSignedIn(!!user);
+      setLoading(false);
     });
   }, []);
 
-  // useEffect(() => {
-  //   if (currentUser) {
-  //     setIsSignedIn(true);
-  //   } else {
-  //     setIsSignedIn(false);
-  //   }
-  // }, [currentUser]);
+  if (loading) {
+    return (
+      <div>
+        <CircularProgress />
+        <div>Loading...</div>
+      </div>
+    );
+  }
 
   return (
     <AuthContext.Provider
