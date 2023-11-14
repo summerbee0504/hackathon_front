@@ -157,7 +157,7 @@ const PostContent = (props: { id: string; post: Article }) => {
       {props.post.category === '動画' ? (
         <YouTube videoId={props.post.url} opts={{ width: '100%' }} />
       ) : props.post.url ? (
-        <Button variant="contained" sx={{ width: '100%' }}>
+        <Button variant="contained" sx={{ width: '100%' }} href={props.post.url}>
           Visit the link
         </Button>
       ) : null}
